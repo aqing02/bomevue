@@ -27,6 +27,8 @@ dist-ssr
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+.history
+.husky
 
 components.d.ts
 auto-imports.d.ts

@@ -1,23 +1,31 @@
-import { post } from '@/utils/request';
+import http from '@/utils/request';
+/**
+ * @description:登录
+ * @return {*}
+ */
+const login = (
+  data,
+  config = {
+    custom: {
+      auth: true,
+    },
+  },
+) => http.post('/api/user/login', data, config);
 
-export default class User {
-  /**
-   * 登录
-   * @param {String} username 用户名
-   * @param {String} password 密码
-   * @returns
-   */
-  static async login(username, password) {
-    return post('/login', {
-      username,
-      password,
-    });
-  }
-  /**
-   * @description:null
-   * @return {*}
-   */
-  static async config() {
-    return (await post('/api/common/getConfig', {})).data;
-  }
-}
+/**
+ * @description:获取全局配置
+ * @return {*}
+ */
+const getconfig = (
+  data,
+  config = {
+    custom: {
+      auth: true,
+    },
+  },
+) => http.post('/api/common/getConfig', data, config);
+
+export default {
+  login,
+  getconfig,
+};

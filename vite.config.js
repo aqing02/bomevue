@@ -2,7 +2,7 @@
  * @Author: aqing 1134575174@qq.com
  * @Date: 2023-05-20 10:43:18
  * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-05-20 18:10:17
+ * @LastEditTime: 2023-07-24 17:38:41
  * @FilePath: \vite-vue2-js-starter-template-master\vite.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -45,13 +45,13 @@ export default ({ mode }) => {
       // 允许跨域
       cors: false,
       // 自定义代理规则
-      proxy: {
-        '/api': {
-          target: VITE_BASE_URL,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
+      // proxy: {
+      //   '/api': {
+      //     target: VITE_BASE_URL,
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(/^\/api/, ''),
+      //   },
+      // },
     },
     build: {
       // 设置最终构建的浏览器兼容目标
