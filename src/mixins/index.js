@@ -69,7 +69,8 @@ export default {
     toast(msg, type = 'success') {
       that.$toast({
         message: msg,
-        icon: 'https://img01.yzcdn.cn/vant/logo.png',
+        type: type,
+        // icon: 'https://img01.yzcdn.cn/vant/logo.png',
       });
     },
     loading() {
@@ -77,6 +78,7 @@ export default {
         message: '加载中...',
         forbidClick: true,
         loadingType: 'spinner',
+        icon: 'https://i.postimg.cc/V6k3xDjS/loading.gif',
         overlay: true,
       });
     },
