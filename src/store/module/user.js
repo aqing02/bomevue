@@ -2,6 +2,8 @@ export default {
   namespaced: true,
   state: () => ({
     address: '',
+    connect_address: '',
+    is_connect: false,
     token: '',
     usermsg: {},
     signstatus: true,
@@ -94,6 +96,14 @@ export default {
     },
     setchecknetwork_status(state, msg) {
       state.setchecknetwork_status = msg;
+    },
+    setis_connect(state, msg) {
+      state.is_connect = msg;
+    },
+    setconnect_address(state, msg) {
+      state.connect_address = msg;
+      console.log(msg.includes(state.address));
+      state.is_connect = msg.includes(state.address);
     },
   },
   actions: {
