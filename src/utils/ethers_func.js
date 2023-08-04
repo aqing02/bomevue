@@ -1,9 +1,9 @@
 import { ethers } from 'ethers';
 
-import { contractAbi } from '@/until/abi.js';
+import { contractAbi } from '@/utils/abi.js';
 
-import { token_abi } from '@/until/token_abi.js';
-import { contract_abi } from '@/until/contract_abi.js';
+import { token_abi } from '@/utils/token_abi.js';
+import { contract_abi } from '@/utils/contract_abi.js';
 import store from '@/store/index';
 import tool from '@/mixins/index.js';
 let tool_fuc = tool.methods;
