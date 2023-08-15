@@ -149,10 +149,10 @@ class ethers_func {
       //TODO handle the exception
     }
   }
-  num_toformatEther(bignumber, wei = 18) {
+  TN(bignumber, wei = 18) {
     return ethers.utils.formatUnits(bignumber, wei);
   }
-  num_toparseEther(bignumber, wei = 18) {
+  TB(bignumber, wei = 18) {
     return ethers.utils.parseUnits(bignumber, wei);
   }
 }

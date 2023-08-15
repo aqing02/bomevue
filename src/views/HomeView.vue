@@ -7,25 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <main>
-    <count-down
-      class="timecss"
-      v-on:start_callback="countDownS_cb(1)"
-      v-on:end_callback="countDownE_cb(1)"
-      :currentTime="1481450106"
-      :startTime="1481450110"
-      :endTime="1481450115"
-      tipText="距离活动开始还有"
-      tipTextEnd="距离活动结束还有"
-      endText="已结束"
-      :dayTxt="' 天 '"
-      :hourTxt="' 时 '"
-      :minutesTxt="' 分 '"
-      :secondsTxt="' 秒 '"
-    ></count-down>
-    <van-button @click="showloading" type="primary">主要按钮</van-button>
-    <div class="connect_wallet">连接钱包</div>
-  </main>
+  <div></div>
 </template>
 
 <script>

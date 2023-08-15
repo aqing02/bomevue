@@ -46,15 +46,5 @@ export default {
 </script>
 
 <style lang="less">
-@media (min-width: 1024px) {
-  .about {
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
 
-    h1 {
-      color: red;
-    }
-  }
-}
 </style>
