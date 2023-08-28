@@ -3,10 +3,6 @@
   "description": "Vue2 JavaScript Starter Project For Vite.",
   "version": "0.0.0",
   "license": "MIT",
-  "author": {
-    "name": "@liqing",
-    "email": "1134575174@qq.com"
-  },
   "homepage": "https://elanyoung.github.io/vite-vue2-js-starter-template",
   "repository": {
     "type": "git",
