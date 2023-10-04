@@ -2,7 +2,7 @@
  * @Author: aqing 1134575174@qq.com
  * @Date: 2023-05-20 10:43:18
  * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-07-24 17:38:41
+ * @LastEditTime: 2023-10-04 10:39:52
  * @FilePath: \vite-vue2-js-starter-template-master\vite.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -34,12 +34,7 @@ export default ({ mode }) => {
       },
       postcss: {
         // options here will be passed to postcss-loader
-        plugins: [
-          require('postcss-pxtorem')({
-            rootValue: 37.5, // 设计稿宽度的1/10,（JSON文件中不加注释，此行注释及下行注释均删除）
-            propList: ['*'], // 需要做转化处理的属性，如`hight`、`width`、`margin`等，`*`表示全部
-          }),
-        ],
+        plugins: [],
       },
     },
     server: {

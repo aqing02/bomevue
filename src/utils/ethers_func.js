@@ -15,7 +15,7 @@ class ethers_func {
     // 代币地址
     this.token_address = '0xbBE8929988eeeFF501b4706669844A5E9A2D20b3';
     this.token_address1 = '0x9C67792dc2a5282704e20F2779eaFB13e1618d0F';
-    this.contract_arr = [this.build_functional_contract(), this.build_token_contract()];
+    // this.contract_arr = [this.build_functional_contract(), this.build_token_contract()];
   }
   connect_web() {
     return new ethers.providers.Web3Provider(window.ethereum);

@@ -2,7 +2,7 @@
  * @Author: aqing 1134575174@qq.com
  * @Date: 2023-07-19 16:22:27
  * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-07-26 18:58:27
+ * @LastEditTime: 2023-10-04 10:42:45
  * @FilePath: \vue2_vite_ethers\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -59,64 +59,12 @@ export default {
   transition: color 0.2s ease;
 }
 
-header {
-  max-height: 100vh;
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  margin-top: 2rem;
-  font-size: 12px;
-  text-align: center;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    place-items: flex-start;
-  }
-
-  nav {
-    padding: 1rem 0;
-    margin-top: 1rem;
-    margin-left: -1rem;
-    font-size: 1rem;
-    text-align: left;
+@media screen and (min-width: 480px) {
+  body,
+  html {
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
   }
 }
 </style>

@@ -2,12 +2,12 @@
  * @Author: aqing 1134575174@qq.com
  * @Date: 2023-07-19 16:22:27
  * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-07-27 17:55:55
+ * @LastEditTime: 2023-10-04 10:44:37
  * @FilePath: \vue2_vite_ethers\src\views\HomeView.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div></div>
+  <div class="home-container">11111</div>
 </template>
 
 <script>
@@ -43,14 +43,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.timecss {
-  color: black;
-  font-size: 18px;
-  font-weight: 600;
-}
-.connect_wallet {
-  width: 50px;
-  padding: 5px 10px;
-  background: antiquewhite;
+.home-container {
+  width: 100%;
 }
 </style>
