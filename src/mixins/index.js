@@ -23,6 +23,9 @@ export default {
       // 重新构建URL，并返回
       return urlObject.toString();
     },
+    getImageUrl(url) {
+      return new URL(`../assets/${url}`, import.meta.url).href;
+    },
     getParam(url) {
       let routes = getCurrentPages(); // 获取当前打开过的页面路由数组
       console.log(routes);
@@ -73,7 +76,7 @@ export default {
         // icon: 'https://img01.yzcdn.cn/vant/logo.png',
       });
     },
-    loading() {
+    loading_modal() {
       that.$toast.loading({
         message: '加载中...',
         forbidClick: true,
