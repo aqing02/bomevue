@@ -7,7 +7,9 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="home-container">11111</div>
+  <div class="home-container">
+    <Head title="首页"></Head>
+  </div>
 </template>
 
 <script>
@@ -45,5 +47,7 @@ export default {
 <style lang="scss" scoped>
 .home-container {
   width: 100%;
+  height: 100vh;
+  // background: #000;
 }
 </style>
