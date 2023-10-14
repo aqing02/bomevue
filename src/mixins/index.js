@@ -264,6 +264,34 @@ export default {
       let b = n.slice(0, n.length - 5);
       return Number(b);
     },
+    /**
+     * @description:转换获取以数字形式传过来的大数字
+     * @param {*} de 精度
+     * @param {*} num 数量
+     * @return {*}
+     */
+    get_Decimal(de, num) {
+      var sb = 1;
+      for (let i = 0; i < de; i++) {
+        sb += '0';
+      }
+      return this.twopoints(num / sb, 4);
+    },
+    /**
+     * @description: 保留多少位小数但不四舍五入
+     * @param {*} mul 数量
+     * @param {*} len 保留小数位数
+     * @return {*}
+     */
+    toFixed_keep(mul, len = 2) {
+      if (String(mul).indexOf('.') != -1) {
+        const sp = String(mul).split('.');
+        const back = sp[1].substring(0, len);
+        return sp[0] + '.' + back;
+      } else {
+        return mul;
+      }
+    },
     // 获取系统栏高度
     getSysteminfo() {
       let statusBarHeight = '';
