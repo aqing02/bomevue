@@ -46,6 +46,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+// @media screen and (min-width: 480px) {
+//   .home-container {
+//     padding-bottom: 0 !important;
+//   }
+// }
 .home-container {
   width: 100%;
   min-height: 100vh;

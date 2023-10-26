@@ -49,13 +49,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (min-width: 480px) {
+  .tabbar-container {
+    width: 375px !important;
+    margin: 0 auto;
+  }
+}
 .tabbar-container {
   width: 100%;
   height: 50px;
   background: #000;
   position: fixed;
   bottom: 0;
-  z-index: 999;
+  // z-index: 999;
   display: flex;
   justify-content: space-around;
   align-items: center;
