@@ -60,6 +60,13 @@ export default {
         },
       });
     },
+
+    /**
+     * @description: 保留几位小数但不四舍五入
+     * @param {*} num
+     * @param {*} len
+     * @return {*}
+     */
     fixednokeep(num, len) {
       return Number(parseFloat(num).toFixed(len).slice(0, -1));
     },
@@ -131,6 +138,7 @@ export default {
      * 0x0171...fB15d680
      */
     textOmit(textValue, to, from) {
+      textValue = textValue.replace(/^0x/, 'b');
       let a = textValue.substring(0, to);
       let a2 = textValue.substring(textValue.length - from, textValue.length);
       return `${a}...${a2}`;
@@ -143,17 +151,27 @@ export default {
      */
     fuzzyQuery(exchangearr, keyWord) {
       if (keyWord !== '') {
-        let reg = new RegExp(keyWord);
-        console.log(reg);
-        let arr = [];
-        for (var i = 0; i < exchangearr.length; i++) {
-          if (reg.test(exchangearr[i].name)) {
-            arr.push(exchangearr[i]);
-            exchangearr = arr;
+        // let reg = new RegExp(keyWord);
+        // console.log(reg);
+        const results = exchangearr.filter((item) => {
+          if (item.name) {
+            return item.name.includes(keyWord);
+          } else {
+            return item.address.includes(keyWord);
           }
-        }
+        });
+        return results;
+        // let arr = [];
+        // for (var i = 0; i < exchangearr.length; i++) {
+        //   if (reg.test(exchangearr[i].name || exchangearr[i].address)) {
+        //     arr.push(exchangearr[i]);
+        //     exchangearr = arr;
+        //   }
+        // }
+        // console.log(arr);
+        // return arr;
       } else {
-        this.otclist();
+        return exchangearr;
       }
     },
     // 获取日期
@@ -287,7 +305,11 @@ export default {
       if (String(mul).indexOf('.') != -1) {
         const sp = String(mul).split('.');
         const back = sp[1].substring(0, len);
-        return sp[0] + '.' + back;
+        if (len > 0) {
+          return sp[0] + '.' + back;
+        } else {
+          return sp[0];
+        }
       } else {
         return mul;
       }
@@ -345,6 +367,16 @@ export default {
       }
       //正则替换
       str = str.replace(/[^\d^\.]+/g, ''); // 保留数字和小数点
+      return str;
+    },
+    /**
+     * @description: 输入框正整数输入
+     * @param {*} num
+     * @return {*}
+     */
+    checkInput_NOdig(num) {
+      let str = num.toString();
+      str = str.replace(/^(0+)|[^\d]+/g, '');
       return str;
     },
     // 通知
