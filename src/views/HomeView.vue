@@ -7,9 +7,6 @@ export default {
   data() {
     return {};
   },
-  components: {
-    CountDown,
-  },
   created() {},
   methods: {},
 };
