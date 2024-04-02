@@ -1,20 +1,43 @@
-<!--
- * @Author: aqing 1134575174@qq.com
- * @Date: 2023-07-19 16:22:27
- * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-10-04 10:42:45
- * @FilePath: \vue2_vite_ethers\src\App.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 <script>
+import tp from 'tp-js-sdk';
+// import translate from 'i18n-jsautotranslate';
 export default {
   data() {
-    return {};
+    return {
+      transitionName: 'fade',
+    };
   },
-  created() {
-    // if (!this.$store.state.user.address) {
-    this.$ethers.getwallet_address();
-    // }
+  mounted() {},
+  methods: {},
+  async created() {
+    if (tp.isConnected()) {
+      const { data } = await tp.getCurrentWallet();
+      if (
+        this.$store.state.user.loginaddress &&
+        data.address.toLowerCase() !== this.$store.state.user.loginaddress.toLowerCase()
+      ) {
+        this.$store.commit('user/removemsg');
+        this.$router.replace({ name: 'index' });
+      }
+    }
+    if (window.ethereum) {
+      this.$ethers.getwallet_address();
+      ethereum.on('accountsChanged', async (accounts) => {
+        console.log('removemsg', accounts[0]);
+        this.$store.commit('user/setaddress', accounts[0]);
+        this.$store.commit('user/removemsg');
+        this.$router.replace({ name: 'index' });
+        window.location.reload();
+      });
+      ethereum.on('networkChanged', (networkIDstring) => {
+        //一旦切换网络这里就会执行
+        console.log(networkIDstring);
+        this.$ethers.getwallet_address();
+        window.location.reload();
+      });
+    } else {
+      this.$notify.error('未检测到Web3环境');
+    }
     console.log(window.ethereum.isConnected());
   },
 };
@@ -22,25 +45,23 @@ export default {
 
 <template>
   <div id="app">
-    <!-- <header>
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-
-        <nav>
-          <router-link to="/">Home</router-link>
-          <router-link to="/about">About</router-link>
-          <router-link to="/time">Time</router-link>
-        </nav>
-      </div>
-    </header> -->
-
-    <router-view />
+    <!-- <transition :name="transitionName" mode="out-in"> -->
+    <router-view></router-view>
+    <!-- </transition> -->
   </div>
 </template>
 
 <style>
+body,
+html {
+  overflow-x: auto;
+}
+
+@font-face {
+  font-family: AnekBangla;
+  src: url('./assets/fonts/AnekBangla.ttf');
+}
+
 ::-webkit-scrollbar-track {
   background: rgb(0 0 0 / 10%);
   border-radius: 0;
@@ -59,12 +80,13 @@ export default {
   transition: color 0.2s ease;
 }
 
-@media screen and (min-width: 480px) {
-  body,
-  html {
-    width: 375px;
-    height: 812px;
-    margin: 0 auto;
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

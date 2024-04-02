@@ -1,23 +1,21 @@
-/*
- * @Author: aqing 1134575174@qq.com
- * @Date: 2023-06-21 17:30:20
- * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-07-24 17:33:58
- * @FilePath: \btgl\src\config\request.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import axios from 'axios';
 import store from '../store/index';
-import mixins from '../mixins';
 import router from '@/router/index';
-const mixinsfunc = mixins.methods;
+import vue from 'vue';
+import crypt from '@/utils/crypt.js';
+import i18n from '@/locales';
+// const cancelToken = axios.CancelToken;
+// const source = cancelToken.source();
+
+let that = new vue();
 // 创建axios实例
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL, // 设置基础URL
-  timeout: 10000, // 设置请求超时时间
+  // baseURL: import.meta.env.VITE_BASE_URL, // 设置基础URL
+  baseURL: '/api', // 设置基础URL
+  timeout: 60000, // 设置请求超时时间
   headers: {
     'Content-Type': 'application/json',
-    'Cache-Control': 'no-store',
+    // 'Cache-Control': 'no-store',
   },
   custom: {
     auth: false,
@@ -30,20 +28,22 @@ instance.interceptors.request.use(
     // if (config.url === "/api/xms/checkAddress") {
     //   config.custom.auth = true;
     // }
+    // config.cancelToken = source.token;
     // 在发送请求之前，可以对请求进行自定义处理，例如添加token
+    let cryptmsg = crypt.EncryptKey(config.data);
+    config.data = cryptmsg.cryptdata || '';
     const token = store.state.user.token;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
     if (!config?.custom?.auth) {
       // 可以在此通过vm引用vuex中的变量，具体值在vm.$store.state中
       // config.header.Authorization = vm.$store.state.user.token
       // config.header.lang = vm.$store.state.user.systemlang
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = token;
+      cryptmsg.key ? (config.headers.key = cryptmsg.key) : '';
     } else {
-      router.push({
-        name: 'index',
-      });
+      cryptmsg.key ? (config.headers.key = cryptmsg.key) : '';
+      // router.push({
+      //   name: 'index',
+      // });
     }
     return config;
   },
@@ -57,10 +57,15 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     // 对响应数据进行处理，例如统一处理错误信息
-    if (response.data.code !== 0) {
-      mixinsfunc.showtoast(response.data.msg, 'error');
-      if (response.data.code == 10004) {
-        store.commit('user/removeusermsg', true);
+    if (response.data.errorCode !== 200) {
+      that.$notify.warning(i18n.tc(`error_code${response.data.errorCode}`));
+      if (response.data.errorCode == 1004 || response.data.errorCode == 1012) {
+        store.commit('user/removemsg', true);
+        // source.cancel('登录信息已过期');
+        router.push({
+          name: 'index',
+        });
+        // window.location.reload();
       }
       console.error('请求出错：', response.data.msg);
       return Promise.reject(response.data.msg);
@@ -85,20 +90,25 @@ instance.interceptors.response.use(
         case 500:
           console.error('服务器内部错误');
           break;
-        case 10004:
+        case 1004:
           console.error('未授权，请登录');
           store.commit('user/removeusermsg', true);
           router.push({
-            name: 'index',
+            name: 'first',
           });
           break;
         default:
-          console.error('请求出错：', error.msg);
+          console.error(error.msg);
       }
     } else {
-      console.error('请求出错：', error.msg);
+      console.error(error.msg);
     }
+    // if (axios.isCancel(error)) {
+    //   // 取消请求的情况下，终端Promise调用链
+    //   return new Promise(() => {});
+    // } else {
     return Promise.reject(error);
+    // }
   },
 );
 

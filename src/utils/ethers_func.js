@@ -1,21 +1,18 @@
 import { ethers } from 'ethers';
-
-import { contractAbi } from '@/utils/abi.js';
-
 import { token_abi } from '@/utils/token_abi.js';
-import { contract_abi } from '@/utils/contract_abi.js';
+import { contract_abi } from './contract_abi';
 import store from '@/store/index';
 import tool from '@/mixins/index.js';
+import vue from 'vue';
+let that = new vue();
 let tool_fuc = tool.methods;
+
 class ethers_func {
   constructor() {
     // 合约地址
-    this.contract_address = '0xA07B8B161Cb8A1A54488024b61A1B6Ed023a0d3C';
-    this.contract_address1 = '0x7C90671EC12Cf8e9c9153C9edb0aa342fCF0C17b';
+    this.contract_address = import.meta.env.VITE_contract_address;
     // 代币地址
-    this.token_address = '0xbBE8929988eeeFF501b4706669844A5E9A2D20b3';
-    this.token_address1 = '0x9C67792dc2a5282704e20F2779eaFB13e1618d0F';
-    // this.contract_arr = [this.build_functional_contract(), this.build_token_contract()];
+    this.token_address = import.meta.env.VITE_token_address;
   }
   connect_web() {
     return new ethers.providers.Web3Provider(window.ethereum);
@@ -26,127 +23,159 @@ class ethers_func {
         method: 'eth_requestAccounts',
       })
       .then((res) => {
-        console.log(res[0]);
         this.getnetwork();
         store.commit('user/setaddress', res[0]);
       });
   }
-  getnetwork() {
-    console.log(store.state.user.chianmsg.chainId);
-    console.log(window.ethereum.networkVersion);
-    if (Number(store.state.user.chianmsg.chainId) !== Number(window.ethereum.networkVersion)) {
-      console.log('需要更换网络');
-      store.commit('user/setchecknetwork_status', true);
-    } else {
-      store.commit('user/setchecknetwork_status', false);
+  async getnetwork() {
+    try {
+      const signer = this.connect_web().getSigner();
+      let chianid = await signer.getChainId();
+      if (Number(store.state.user.chianmsg.chainId) !== Number(chianid)) {
+        console.log('需要更换网络');
+        // store.commit('user/setchecknetwork_status', true);
+        await this.checknetwork();
+      } else {
+        // store.commit('user/setchecknetwork_status', false);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
-  checknetwork(obj) {
-    ethereum.request({
-      method: 'wallet_addEthereumChain', // Metamask的api名称
-      params: [
-        {
-          chainId: `0x${obj.chainId.toString(16)}`, // 网络id，16进制的字符串
-          chainName: obj.chainName, // 添加到钱包后显示的网络名称
-          rpcUrls: [
-            obj.host, // rpc地址
-          ],
-          blockExplorerUrls: [
-            obj.blockExplorerUrl, // 网络对应的区块浏览器
-          ],
-          nativeCurrency: {
-            // 网络主币的信息
-            name: obj.symbol,
-            symbol: obj.symbol,
-            decimals: obj.decimals,
+
+  async checknetwork(obj = store.state.user.chianmsg) {
+    try {
+      const result = await window.ethereum.request({
+        method: 'wallet_addEthereumChain', // Metamask的api名称
+        params: [
+          {
+            chainId: `0x${obj.chainId.toString(16)}`, // 网络id，16进制的字符串
+            chainName: obj.chainName, // 添加到钱包后显示的网络名称
+            rpcUrls: [
+              obj.host, // rpc地址
+            ],
+            blockExplorerUrls: [
+              obj.blockExplorerUrl, // 网络对应的区块浏览器
+            ],
+            nativeCurrency: {
+              // 网络主币的信息
+              name: obj.symbol,
+              symbol: obj.symbol,
+              decimals: obj.decimals,
+            },
           },
-        },
-      ],
-    });
+        ],
+      });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
   sign_message(msg) {
-    const signer = this.connect_network().getSigner();
+    const signer = this.connect_web().getSigner();
     return signer.signMessage(msg);
   }
-  build_functional_contract() {
-    return new ethers.Contract(this.contract_address1, contract_abi, this.connect_web().getSigner());
+  build_function_contract() {
+    return new ethers.Contract(this.contract_address, contractAbi, this.connect_web().getSigner());
   }
-  build_token_contract() {
-    return new ethers.Contract(this.token_address1, token_abi, this.connect_web().getSigner());
+  build_token_contract(token_address) {
+    return new ethers.Contract(this.token_address, token_abi, this.connect_web().getSigner());
   }
+
+  checksign(sign, randomnum) {
+    let sign_status = null;
+    const result = ethers.utils.verifyMessage(randomnum, sign);
+    if (ethers.utils.getAddress(store.state.user.address) == ethers.utils.getAddress(result)) {
+      sign_status = true;
+    } else {
+      sign_status = false;
+    }
+    return sign_status;
+  }
+
   /**
-   * @description:
-   * @param {*} func_msg 所需要的参数
-   * @param {*} func_name 所需调用的方法名
-   * @param {*} functional_contract_name 合约实例名称
-   * @param {*} token_contract_name 代币实例名称
+   * @description: 查询主链币余额
    * @return {*}
    */
-  async get_token_allowance(func_msg, func_name, functional_contract_name, token_contract_name) {
+  async get_chain_balance() {
     try {
-      let allowance_num = '';
-      allowance_num = await this.build_token_contract().allowance(store.state.user.address, this.contract_address1);
-      if (allowance_num.lt(this.num_toparseEther(func_msg))) {
-        // tool_fuc.toast('额度不足', 'info')
-        return this.approve_token(func_msg, func_name);
+      const balance = await this.connect_web().getBalance(store.state.user.address);
+      store.commit('user/setchian_balance', tool_fuc.toFixed_keep(this.TN(balance), 4));
+      return balance;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  /**
+   * @description: 获取代币余额
+   * @return {*}
+   */
+  async get_token_balance() {
+    try {
+      const result = await this.build_token_contract().balanceOf(store.state.user.address);
+      return result;
+    } catch (error) {
+      console.log(err);
+    }
+  }
+
+  async get_token_allowance() {
+    try {
+      const result = await this.build_token_contract().allowance(store.state.user.address, this.contract_address);
+      return result;
+    } catch (error) {
+      console.log(err);
+    }
+  }
+
+  /**
+   * @description: 授权
+   * @param {*} num
+   * @return {*}
+   */
+  async approve_token(num) {
+    try {
+      // this.TB(String(num))
+      let result = await this.build_token_contract().approve(this.contract_address, num);
+      return result;
+    } catch (e) {
+      console.log(e);
+      that.$notify.error('Approve Failed');
+    }
+  }
+
+  /**
+   * @description: 充值
+   * @return {*}
+   */
+  async deposit_token(pay_msg) {
+    try {
+      const result = await this.build_function_contract().deposit(
+        this.token_address,
+        this.TB(String(pay_msg.payU)),
+        pay_msg.code,
+        pay_msg.code,
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  /**
+   * @description: 检测用户是否注册
+   * @return {*}
+   */
+  async check_user_reg() {
+    try {
+      const result = await this.build_function_contract().ref(store.state.user.address);
+      console.log(result);
+      if (ethers.constants.AddressZero == result) {
+        store.commit('user/setregisterstatus', false);
       } else {
-        return this.deposit_token(func_msg, func_name);
+        store.commit('user/setregisterstatus', true);
       }
-    } catch (e) {
-      console.log(e);
-      //TODO handle the exception
-    }
-  }
-  async approve_token(func_msg, func_name, functional_contract_name, token_contract_name) {
-    try {
-      let result = await this.build_token_contract().approve(this.contract_address1, ethers.constants.MaxUint256);
-      await result.wait(); //等待区块确认后再进行下一步 等同于waitForTransaction
-      if (result.hash) {
-        this.connect_web()
-          .waitForTransaction(result.hash)
-          .then((res) => {
-            this.deposit_token(func_msg, func_name);
-            return hash;
-          });
-      }
-    } catch (e) {
-      console.log(e);
-      uni.hideLoading();
-      tool_fuc.toast('授权失败', 'error');
-      return e;
-      //TODO handle the exception
-    }
-  }
-  async deposit_token(func_msg, func_name) {
-    try {
-      console.log(func_msg);
-      console.log(func_name);
-      const gasPrice = ethers.utils.parseUnits('10', 'gwei');
-      const gasLimit = 550000;
-      const gasMsg = {
-        gasPrice: gasPrice,
-        gasLimit: gasLimit,
-      };
-      console.log(this.num_toparseEther('100'));
-      return new Promise((resolve, reject) => {
-        this.build_functional_contract()
-          [func_name](this.token_address1, this.num_toparseEther('100'), '202307198803', '1', gasMsg)
-          .then((res) => {
-            console.log(res);
-            resolve(res);
-            uni.hideLoading();
-          })
-          .catch((err) => {
-            console.log(err);
-            uni.hideLoading();
-            tool_fuc.toast('交易失败', 'error');
-          });
-      });
-    } catch (e) {
-      uni.hideLoading();
-      console.log(e);
-      tool_fuc.toast('交易失败', 'error');
-      //TODO handle the exception
+    } catch (error) {
+      console.log(error);
     }
   }
   TN(bignumber, wei = 18) {

@@ -2,7 +2,7 @@
  * @Author: aqing 1134575174@qq.com
  * @Date: 2023-07-19 16:22:27
  * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-10-04 14:17:48
+ * @LastEditTime: 2024-04-02 14:29:08
  * @FilePath: \vue2_vite_ethers\src\main.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -19,6 +19,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import compo from '@/components';
+import i18n from './locales/index';
 
 // console.log(window.ethereum);
 // console.log(ethereum);
@@ -47,5 +48,6 @@ Vue.use(compo);
 new Vue({
   router,
   store,
+  i18n,
   render: (h) => h(App),
 }).$mount('#app');

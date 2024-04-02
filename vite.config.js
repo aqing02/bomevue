@@ -1,21 +1,13 @@
-/*
- * @Author: aqing 1134575174@qq.com
- * @Date: 2023-05-20 10:43:18
- * @LastEditors: aqing 1134575174@qq.com
- * @LastEditTime: 2023-10-04 10:39:52
- * @FilePath: \vite-vue2-js-starter-template-master\vite.config.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import { resolve } from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import vue2 from '@vitejs/plugin-vue2';
 // const { VITE_PORT, VITE_BASE_URL } = loadEnv(mode, process.cwd());
 // console.log(VITE_BASE_URL);
 export default ({ mode }) => {
-  const { VITE_PORT, VITE_BASE_URL } = loadEnv(mode, process.cwd());
+  const { VITE_PORT } = loadEnv(mode, process.cwd());
 
   return defineConfig({
-    base: VITE_BASE_URL,
+    base: '/',
     plugins: [vue2()],
     resolve: {
       alias: {
