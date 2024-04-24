@@ -31,7 +31,7 @@ class ethers_func {
     try {
       const signer = this.connect_web().getSigner();
       let chianid = await signer.getChainId();
-      if (Number(store.state.user.chianmsg.chainId) !== Number(chianid)) {
+      if (Number(store.state.user[import.meta.env.VITE_CHAIN_ID].chainId) !== Number(chianid)) {
         console.log('需要更换网络');
         // store.commit('user/setchecknetwork_status', true);
         await this.checknetwork();
@@ -43,7 +43,7 @@ class ethers_func {
     }
   }
 
-  async checknetwork(obj = store.state.user.chianmsg) {
+  async checknetwork(obj = store.state.user[import.meta.env.VITE_CHAIN_ID]) {
     try {
       const result = await window.ethereum.request({
         method: 'wallet_addEthereumChain', // Metamask的api名称
@@ -76,7 +76,7 @@ class ethers_func {
     return signer.signMessage(msg);
   }
   build_function_contract() {
-    return new ethers.Contract(this.contract_address, contractAbi, this.connect_web().getSigner());
+    return new ethers.Contract(this.contract_address, contract_abi, this.connect_web().getSigner());
   }
   build_token_contract(token_address) {
     return new ethers.Contract(this.token_address, token_abi, this.connect_web().getSigner());
@@ -140,7 +140,7 @@ class ethers_func {
       return result;
     } catch (e) {
       console.log(e);
-      that.$notify.error('Approve Failed');
+      // that.$notify.error('Approve Failed');
     }
   }
 

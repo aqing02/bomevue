@@ -11,15 +11,14 @@ export default {
     balance: {},
     signtext: '',
     lang: 'en',
+    api_lang: 'en',
     config: {},
     chainid: '',
-    coinlog: '',
-    systemlang: 'zh_CN',
-    rank: '',
     signmessage: '',
     configmsg: {},
     menukey: 'usermsg',
-    chianmsg: {
+    devicename: 'pc',
+    56: {
       chainId: 56,
       chainName: 'Binance Smart Chain Mainnet',
       host: 'https://bsc-dataseed1.defibit.io',
@@ -27,11 +26,26 @@ export default {
       symbol: 'BNB',
       decimals: 18,
     },
+    97: {
+      chainId: 97,
+      chainName: 'Binance Smart Chain Testnet',
+      host: 'https://data-seed-prebsc-2-s1.bnbchain.org:8545',
+      blockExplorerUrl: 'https://testnet.bscscan.com',
+      symbol: 'tBNB',
+      decimals: 18,
+    },
     checknetwork_status: false,
+    mob_menu_show: false,
+    lottie_show: true,
+    lottie_status: true,
+    newsmsg: {},
   }),
   mutations: {
     setaddress(state, msg) {
       state.address = msg;
+    },
+    setconnect_address(state, msg) {
+      state.connect_address = msg;
     },
     setusermsg(state, msg) {
       state.usermsg = msg;
@@ -56,6 +70,7 @@ export default {
       state.userdetail = {};
       state.balance = {};
       state.token = null;
+      state.connect_address = '';
     },
     setpid(state, msg) {
       state.usermsg.pid = msg;
@@ -69,12 +84,6 @@ export default {
     setchainid(state, id) {
       state.chainid = id;
     },
-    setcoinlog(state, msg) {
-      state.coinlog = msg;
-    },
-    rankset(state, msg) {
-      state.rank = msg;
-    },
     setsignmessage(state, msg) {
       state.signmessage = msg;
     },
@@ -87,13 +96,6 @@ export default {
     setinvitecode(state, msg) {
       state.invitecode = msg;
     },
-    setticket_hash(state, msg) {
-      console.log(msg);
-      state.ticket_hash = msg;
-    },
-    setorder_hash(state, msg) {
-      state.order_hash = msg;
-    },
     setchecknetwork_status(state, msg) {
       state.setchecknetwork_status = msg;
     },
@@ -104,6 +106,24 @@ export default {
       state.connect_address = msg;
       console.log(msg.includes(state.address));
       state.is_connect = msg.includes(state.address);
+    },
+    setdevicename(state, msg) {
+      state.devicename = msg;
+    },
+    setmob_menu_show(state, msg) {
+      state.mob_menu_show = msg;
+    },
+    setlottie_show(state, msg) {
+      state.lottie_show = msg;
+    },
+    setlottie_status(state, msg) {
+      state.lottie_status = msg;
+    },
+    setapi_lang(state, msg) {
+      state.api_lang = msg;
+    },
+    setnewsmsg(state, msg) {
+      state.newsmsg = msg;
     },
   },
   actions: {
