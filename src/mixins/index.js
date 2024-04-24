@@ -95,42 +95,6 @@ export default {
     clearloading() {
       that.$toast.clear();
     },
-    goredirectUrl(url, second = 0) {
-      setTimeout(() => {
-        uni.redirectTo({
-          url,
-          animationType: 'zoom-fade-out',
-          fail() {
-            console.log('跳转失败,尝试Tab跳转,url: ' + url);
-            uni.switchTab({
-              url,
-              fail() {
-                console.log('Tab跳转失败,url: ' + url);
-              },
-            });
-          },
-        });
-      }, second * 1000);
-    },
-    // 跳转页面
-    goUrl(url, second = 0) {
-      setTimeout(() => {
-        uni.navigateTo({
-          url,
-          animationType: 'zoom-fade-out',
-          fail() {
-            console.log('跳转失败,尝试Tab跳转,url: ' + url);
-            uni.switchTab({
-              url,
-              fail() {
-                console.log('Tab跳转失败,url: ' + url);
-              },
-            });
-          },
-        });
-      }, second * 1000);
-    },
-
     /**
      * 实现功能
      * 将地址缩短 使用 ... 进行拼接
