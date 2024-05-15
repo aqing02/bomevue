@@ -1,5 +1,7 @@
 <template>
-  <div class="home-container"></div>
+  <div class="home-container">
+    <Head></Head>
+  </div>
 </template>
 
 <script>
@@ -11,4 +13,10 @@ export default {
   methods: {},
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #191919;
+}
+</style>
