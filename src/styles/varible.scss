@@ -1,18 +1,22 @@
 :root {
-  --theme-color: #333;
+  --theme-color: #191919;
   --theme-background: #eee;
 }
 
 .dark {
-  --theme-color: #eee;
-  --theme-background: #333;
+  --theme-background: #191919;
   --theme-button: #fcd535;
   --theme-text: #191919;
+  --theme-tabbar: #2c2c2c;
+  --theme-tabbar-text-disable: #8c8c8c;
+  --theme-tabbar-text-active: #fff;
 }
 
 .light {
-  --theme-color: #fff;
-  --theme-background: pink;
-  --theme-button: #fff;
+  --theme-background: #191919;
+  --theme-button: #fcd535;
+  --theme-tabbar: #fff;
   --theme-text: #191919;
+  --theme-tabbar-text-disable: #8c8c8c;
+  --theme-tabbar-text-active: #fff;
 }

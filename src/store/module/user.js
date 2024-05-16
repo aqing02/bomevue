@@ -38,7 +38,7 @@ export default {
     mob_menu_show: false,
     lottie_show: true,
     lottie_status: true,
-    theme: 'light',
+    theme: 'dark',
     newsmsg: {},
   }),
   mutations: {

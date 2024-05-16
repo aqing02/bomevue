@@ -10,6 +10,7 @@ export default {
   mounted() {},
   methods: {},
   async created() {
+    window.document.documentElement.setAttribute('class', this.$store.state.user.theme);
     if (tp.isConnected()) {
       const { data } = await tp.getCurrentWallet();
       if (
@@ -60,8 +61,8 @@ html {
 }
 
 @font-face {
-  font-family: AnekBangla;
-  src: url('./assets/fonts/AnekBangla.ttf');
+  font-family: Alibaba;
+  src: url('./assets/fonts/alibaba.woff');
 }
 
 ::-webkit-scrollbar-track {

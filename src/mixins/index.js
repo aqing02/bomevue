@@ -102,7 +102,6 @@ export default {
      * 0x0171...fB15d680
      */
     textOmit(textValue, to, from) {
-      textValue = textValue.replace(/^0x/, 'b');
       let a = textValue.substring(0, to);
       let a2 = textValue.substring(textValue.length - from, textValue.length);
       return `${a}...${a2}`;
