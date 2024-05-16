@@ -10,7 +10,12 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    checktheme(type) {
+      this.$store.commit('user/settheme', type);
+      window.document.documentElement.setAttribute('class', this.$store.state.user.theme);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

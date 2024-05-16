@@ -38,6 +38,7 @@ export default {
     mob_menu_show: false,
     lottie_show: true,
     lottie_status: true,
+    theme: 'light',
     newsmsg: {},
   }),
   mutations: {
@@ -124,6 +125,9 @@ export default {
     },
     setnewsmsg(state, msg) {
       state.newsmsg = msg;
+    },
+    settheme(state, msg) {
+      state.theme = msg;
     },
   },
   actions: {

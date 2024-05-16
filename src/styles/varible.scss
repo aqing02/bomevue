@@ -1,0 +1,18 @@
+:root {
+  --theme-color: #333;
+  --theme-background: #eee;
+}
+
+.dark {
+  --theme-color: #eee;
+  --theme-background: #333;
+  --theme-button: #fcd535;
+  --theme-text: #191919;
+}
+
+.light {
+  --theme-color: #fff;
+  --theme-background: pink;
+  --theme-button: #fff;
+  --theme-text: #191919;
+}

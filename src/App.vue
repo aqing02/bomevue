@@ -52,6 +52,8 @@ export default {
 </template>
 
 <style>
+@import url('./styles/varible.scss');
+
 body,
 html {
   overflow-x: auto;
