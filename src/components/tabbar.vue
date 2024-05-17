@@ -6,7 +6,7 @@
         height="24"
         :src="getImageUrl(`tabbar/${$route.name == p.url ? p.active : p.icon}.png`)"
       ></van-image>
-      <div class="text" :class="{ active: p.id == tabbar_id }">{{ $t(`tabbar_text${p.id}`) }}</div>
+      <div class="text" :class="{ active: $route.name == p.url }">{{ $t(`tabbar_text${p.id}`) }}</div>
     </div>
   </div>
 </template>
