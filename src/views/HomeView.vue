@@ -60,7 +60,7 @@
               <img class="tool-icon" width="24" height="24" :src="getImageUrl('index/coin-arrows.png')" />
             </div>
             <div class="coin-input-box">
-              <input type="text" readonly class="coin-input active" v-model="exchange_num" />
+              <input type="text"  class="coin-input active" v-model="exchange_num" />
             </div>
           </div>
         </div>

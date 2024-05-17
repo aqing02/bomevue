@@ -1,21 +1,12 @@
 <template>
   <div class="lp-container">
     <Head></Head>
-    <!-- <Lp_home @toindex="toindex" v-if="index == 1"></Lp_home> -->
-    <div class="lp-import-box">
-      <div class="lp-import-title-box">
-        <div class="title-left">
-          <img @click.stop="" class="title-arrows" :src="getImageUrl('index/lp-arrows.png')" alt="" />
-          <div class="title-content-box">
-            <div class="title-text">导入流动性池</div>
-            <div class="title-tips">接收LP代币并赚取0.17%的交易费用</div>
-          </div>
-        </div>
-        <div class="title-right">
-          <img class="tool-icon" width="24" height="24" :src="getImageUrl('index/setting.svg')" />
-          <img class="tool-icon" width="24" height="24" :src="getImageUrl('index/time.svg')" />
-        </div>
-      </div>
+    <Lp_home @toindex="toindex" v-if="index == 1"></Lp_home>
+    <Lp_add @toindex="toindex" v-if="index == 2"></Lp_add>
+    <Lp_change @toindex="toindex" v-if="index == 3"></Lp_change>
+    <div class="lp-add-tips" v-if="index == 3">
+      通过添加流动性，您将赚取该币对所有交易额的
+      0.17%，与您在流动性池中的份额成正比。赚取的费用会添加到流动性池中，实时累积，可以通过解除流动性来领取。
     </div>
     <Footer></Footer>
     <tabbar></tabbar>

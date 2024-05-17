@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 60px;
   background: var(--theme-background);
 
   .lp-content-box {
@@ -92,6 +93,9 @@
   }
 
   .lp-import-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 90%;
     padding: 26px 0;
     margin: 0 auto;
@@ -145,5 +149,252 @@
         }
       }
     }
+
+    .lp-coin-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: calc(90% - 20px);
+      padding: 16px 10px;
+      margin-top: 16px;
+      background: var(--theme-background);
+      border-radius: 12px;
+
+      .coin-name-box {
+        display: flex;
+        align-items: center;
+
+        .coin-img {
+          width: 24px;
+          height: 24px;
+          margin-right: 5px;
+        }
+
+        .coin-name {
+          margin-left: 5px;
+          font-family: Alibaba;
+          font-size: 14px;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+
+      .coin-right {
+        width: 24px;
+        height: 24px;
+      }
+
+      .coin-right-change {
+        width: 18px;
+        height: 18px;
+      }
+
+      .coin-balance {
+        font-family: Alibaba;
+        font-size: 12px;
+        font-weight: bold;
+        color: #8c8c8c;
+      }
+    }
+
+    .exchange-box-block {
+      padding: 16px 0;
+      margin-top: 16px;
+      background: var(--theme-background);
+      border-radius: 12px;
+
+      & > div {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .exchange-title-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: Alibaba;
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--theme-tabbar-text-disable);
+
+        .coin-msg {
+          display: flex;
+          align-items: center;
+          margin-left: 11px;
+
+          .coin-name {
+            margin: 0 6px;
+            font-family: Alibaba;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+          }
+        }
+
+        .exchange-title-balance {
+          & > span {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .exchange-coin-msg {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: calc(90% - 20px);
+        padding: 15px 10px;
+        margin-top: 10px;
+        background: var(--theme-tabbar);
+        border-radius: 12px;
+
+        .coin-input {
+          width: 100%;
+          font-family: Alibaba;
+          font-size: 18px;
+          font-weight: 500;
+          color: var(--theme-tabbar-text-disable);
+          text-align: right;
+          background: transparent;
+          border: none;
+          outline: none;
+
+          &.active {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .lp-add-icon {
+      width: 36px;
+      height: 36px;
+      margin-top: 10px;
+    }
+
+    .lp-coin-add-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 0;
+      margin-top: 30px;
+      background: var(--theme-background);
+      border-radius: 12px;
+
+      .add-tips-text {
+        font-family: Alibaba;
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+      }
+
+      .add-tips-btn {
+        padding: 14px 50px;
+        margin-top: 10px;
+        font-family: Alibaba;
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--theme-button);
+        border: 1px solid var(--theme-button);
+        border-radius: 4px;
+      }
+    }
+
+    .lp-price-box {
+      width: calc(90% - 20px);
+      padding: 16px 10px;
+      margin-top: 35px;
+      background: var(--theme-background);
+      border-radius: 12px;
+
+      .lp-price-title {
+        font-family: Alibaba;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+      }
+
+      .lp-line {
+        width: 100%;
+        height: 1px;
+        margin: 10px auto;
+        background: linear-gradient(
+          90deg,
+          rgb(238 238 238 / 0%) 0%,
+          rgb(234 234 234 / 10%) 19%,
+          rgb(220 220 220 / 20%) 80%,
+          rgb(216 216 216 / 0%) 100%
+        );
+      }
+
+      .lp-price-msg {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .lp-price-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .lp-price-num {
+            font-family: Alibaba;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+          }
+
+          .lp-price-text {
+            margin-top: 5px;
+            font-family: Alibaba;
+            font-size: 12px;
+            font-weight: 400;
+            color: #8c8c8c;
+          }
+        }
+      }
+    }
+
+    .lp-max-point {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      font-family: Alibaba;
+      font-size: 12px;
+      font-weight: 500;
+      color: #8c8c8c;
+
+      .point-num {
+        font-family: Alibaba;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fcd535;
+      }
+    }
+
+    .lp-btn {
+      padding: 17px 0;
+      margin-top: 15px;
+      font-family: Alibaba;
+      font-size: 16px;
+      font-weight: 600;
+      color: #191919;
+      text-align: center;
+      background: #fcd535;
+      border-radius: 12px;
+    }
+  }
+
+  .lp-add-tips {
+    width: calc(90% - 24px);
+    padding: 12px;
+    margin: 0 auto;
+    font-family: Alibaba;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+    background: #2c2c2c;
+    border-radius: 20px;
   }
 }

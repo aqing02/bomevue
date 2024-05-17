@@ -18,10 +18,10 @@
       <div>{{ $store.state.user.address ? '找不到流动性' : '连接钱包以查看您的流动性。' }}</div>
       <div class="lp-content-add" v-if="$store.state.user.address">
         <div>未看到您加入的流动性池</div>
-        <div class="add-btn" @click.stop="toindex('2')">查找其他LP代币</div>
+        <div class="add-btn" @click.stop="toindex(2)">查找其他LP代币</div>
       </div>
     </div>
-    <div class="add-lp-btn" @click.stop="toindex('3')">增加流动性</div>
+    <div class="add-lp-btn" @click.stop="toindex(3)">增加流动性</div>
   </div>
 </template>
 
