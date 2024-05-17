@@ -90,4 +90,60 @@
       border-radius: 12px;
     }
   }
+
+  .lp-import-box {
+    width: 90%;
+    padding: 26px 0;
+    margin: 0 auto;
+    margin: 30px auto;
+    background: var(--theme-tabbar);
+    border-radius: 20px;
+
+    & > div {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .lp-import-title-box {
+      display: flex;
+      justify-content: space-between;
+
+      .title-left {
+        display: flex;
+        align-items: center;
+
+        .title-arrows {
+          width: 28px;
+          height: 28px;
+        }
+
+        .title-content-box {
+          margin-left: 10px;
+          font-family: Alibaba;
+          font-size: 20px;
+          font-weight: 500;
+          color: #fff;
+
+          .title-tips {
+            font-family: Alibaba;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--theme-tabbar-text-disable);
+          }
+        }
+      }
+
+      .title-right {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        .tool-icon {
+          width: 24px;
+          height: 24px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
 }

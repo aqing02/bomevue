@@ -1,29 +1,21 @@
 <template>
   <div class="lp-container">
     <Head></Head>
-    <div class="lp-content-box">
-      <div class="lp-content-title-box">
-        <div class="lp-content-title">您的流动性</div>
-        <div class="lp-content-tool">
-          <img
-            class="tool-icon"
-            width="24"
-            @click.stop="setting_popup = true"
-            height="24"
-            :src="getImageUrl('index/setting.svg')"
-          />
+    <!-- <Lp_home @toindex="toindex" v-if="index == 1"></Lp_home> -->
+    <div class="lp-import-box">
+      <div class="lp-import-title-box">
+        <div class="title-left">
+          <img @click.stop="" class="title-arrows" :src="getImageUrl('index/lp-arrows.png')" alt="" />
+          <div class="title-content-box">
+            <div class="title-text">导入流动性池</div>
+            <div class="title-tips">接收LP代币并赚取0.17%的交易费用</div>
+          </div>
+        </div>
+        <div class="title-right">
+          <img class="tool-icon" width="24" height="24" :src="getImageUrl('index/setting.svg')" />
           <img class="tool-icon" width="24" height="24" :src="getImageUrl('index/time.svg')" />
         </div>
       </div>
-      <div class="lp-content-tips">移除流动性以收回代币</div>
-      <div class="lp-content-change">
-        <div>{{ $store.state.user.address ? '找不到流动性' : '连接钱包以查看您的流动性。' }}</div>
-        <div class="lp-content-add" v-if="$store.state.user.address">
-          <div>未看到您加入的流动性池</div>
-          <div class="add-btn">查找其他LP代币</div>
-        </div>
-      </div>
-      <div class="add-lp-btn">增加流动性</div>
     </div>
     <Footer></Footer>
     <tabbar></tabbar>
@@ -31,7 +23,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      index: 1,
+    };
+  },
+  methods: {
+    toindex(type) {
+      this.index = type;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 @import url('../styles/lp.scss');
