@@ -4,7 +4,6 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding-bottom: 60px;
   background: var(--theme-background);
 
   .lp-content-box {
@@ -97,7 +96,7 @@
     flex-direction: column;
     align-items: center;
     width: 90%;
-    padding: 26px 0;
+    padding: 15px 0;
     margin: 0 auto;
     margin: 30px auto;
     background: var(--theme-tabbar);
@@ -155,7 +154,7 @@
       align-items: center;
       justify-content: space-between;
       width: calc(90% - 20px);
-      padding: 16px 10px;
+      padding: 12px 10px;
       margin-top: 16px;
       background: var(--theme-background);
       border-radius: 12px;
@@ -303,7 +302,7 @@
     .lp-price-box {
       width: calc(90% - 20px);
       padding: 16px 10px;
-      margin-top: 35px;
+      margin-top: 15px;
       background: var(--theme-background);
       border-radius: 12px;
 
@@ -359,7 +358,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 16px;
+      margin-top: 10px;
       font-family: Alibaba;
       font-size: 12px;
       font-weight: 500;
@@ -375,7 +374,7 @@
 
     .lp-btn {
       padding: 17px 0;
-      margin-top: 15px;
+      margin-top: 10px;
       font-family: Alibaba;
       font-size: 16px;
       font-weight: 600;

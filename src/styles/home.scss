@@ -4,13 +4,12 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
-  padding-bottom: 60px;
   background: var(--theme-background);
 
   .home-content-box {
     width: 90%;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 5px;
 
     .swap-head-ad {
       display: flex;
@@ -43,7 +42,7 @@
 
     .swap-content-box {
       width: 100%;
-      padding: 18px 0;
+      padding: 12px 0;
       background: var(--theme-tabbar);
       border-radius: 0 0 12px 12px;
 
@@ -171,7 +170,12 @@
       .swap-icon {
         display: flex;
         justify-content: center;
-        margin: 16px auto;
+        margin: 5px auto;
+
+        & > img {
+          width: 36px;
+          height: 36px;
+        }
       }
 
       .exchange-detail-box {
@@ -208,6 +212,11 @@
               font-size: 12px;
               font-weight: 400;
               color: #fff;
+            }
+
+            .icon-img {
+              width: 16px;
+              height: 16px;
             }
           }
         }
